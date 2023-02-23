@@ -1,7 +1,7 @@
-#include <cstdio>
+#include <AHT2x.h>
 #include <unistd.h>
 
-#include <AHT2x.h>
+#include <cstdio>
 
 AHT2x AHT2x;
 
@@ -24,6 +24,8 @@ int main(int argc, char *argv[]) {
   (void)argc;
   (void)argv;
   setup();
-  for (;;) { loop(); }
+  for (;;) {
+    loop();
+  }
   return 0;
 }

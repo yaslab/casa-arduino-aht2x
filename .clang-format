@@ -1,0 +1,5 @@
+BasedOnStyle: LLVM
+AllowShortFunctionsOnASingleLine: InlineOnly
+ColumnLimit: 0
+PackConstructorInitializers: Never
+Standard: Auto
