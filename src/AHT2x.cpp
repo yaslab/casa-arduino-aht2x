@@ -1,5 +1,4 @@
 #include <cmath>
-#include <cstdint>
 
 #include "AHT2x.h"
 
@@ -10,11 +9,11 @@ bool AHT2x::begin() {
 }
 
 bool AHT2x::init() {
-    _delay(100);
+    delay(100);
 
     {
         uint8_t tx_buffer[] = { 0x71 }; // init
-        size_t result = _write(I2C_ADDRESS_AHT2x, tx_buffer, sizeof(tx_buffer), _opaque);
+        size_t result = write(I2C_ADDRESS_AHT2x, tx_buffer, sizeof(tx_buffer));
         if (result != sizeof(tx_buffer)) {
             return false;
         }
@@ -22,7 +21,7 @@ bool AHT2x::init() {
 
     {
         uint8_t rx_buffer[1];
-        size_t result = _read(I2C_ADDRESS_AHT2x, rx_buffer, sizeof(rx_buffer), _opaque);
+        size_t result = read(I2C_ADDRESS_AHT2x, rx_buffer, sizeof(rx_buffer));
         if (result != sizeof(rx_buffer)) {
             return false;
         }
@@ -37,21 +36,21 @@ bool AHT2x::init() {
 }
 
 bool AHT2x::measure(double &temperature, double &humidity) {
-    _delay(10);
+    delay(10);
 
     {
         uint8_t tx_buffer[] = { 0xac, 0x33, 0x00 }; // trigger measurment
-        size_t result = _write(I2C_ADDRESS_AHT2x, tx_buffer, sizeof(tx_buffer), _opaque);
+        size_t result = write(I2C_ADDRESS_AHT2x, tx_buffer, sizeof(tx_buffer));
         if (result != sizeof(tx_buffer)) {
             return false;
         }
     }
 
     for (int retry = 0; retry < 10; retry += 1) {
-        _delay(80);
+        delay(80);
 
         uint8_t rx_buffer[7];
-        size_t result = _read(I2C_ADDRESS_AHT2x, rx_buffer, sizeof(rx_buffer), _opaque);
+        size_t result = read(I2C_ADDRESS_AHT2x, rx_buffer, sizeof(rx_buffer));
         if (result != sizeof(rx_buffer)) {
             return false;
         }
@@ -79,7 +78,7 @@ bool AHT2x::measure(double &temperature, double &humidity) {
 
 bool AHT2x::reset() {
     uint8_t tx_buffer[] = { 0xba }; // soft reset
-    size_t result = _write(I2C_ADDRESS_AHT2x, tx_buffer, sizeof(tx_buffer), _opaque);
+    size_t result = write(I2C_ADDRESS_AHT2x, tx_buffer, sizeof(tx_buffer));
     if (result != sizeof(tx_buffer)) {
         return false;
     }

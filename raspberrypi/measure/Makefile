@@ -1,8 +1,8 @@
-CXXFLAGS=-std=c++11 -O2 -Wall -Wextra -Wsign-conversion -I../src
+CXXFLAGS=-std=c++11 -O2 -Wall -Wextra -Wsign-conversion -I../../src
 
 PROGRAM=aht2x
 
-SRCS=../src/AHT2x.cpp raspberrypi.cpp main.cpp
+SRCS=$(wildcard ../../src/*.cpp) $(wildcard *.cpp)
 OBJS=$(SRCS:.cpp=.o)
 
 all: $(PROGRAM)
