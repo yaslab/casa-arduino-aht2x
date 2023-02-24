@@ -3,6 +3,7 @@
 
 #include <cstddef>
 #include <cstdint>
+#include <functional>
 #include <string>
 
 #if defined(ARDUINO)
@@ -28,6 +29,7 @@ public:
 
 private:
   std::string _path;
+  size_t with_fd(uint8_t address, std::function<ssize_t(int)> body);
 #endif
 
 public:
